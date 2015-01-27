@@ -13,8 +13,8 @@
 9.2.9: git://github.com/dictybase-docker/postgres@51e5166d69320581cb707d6fb102d3ba04803400 9.2
 9.2: git://github.com/dictybase-docker/postgres@51e5166d69320581cb707d6fb102d3ba04803400 9.2
 
-9.3.5: git://github.com/dictybase-docker/postgres@ae759ff77b181c49a8ff301ae197535225ea3add 9.3
-9.3: git://github.com/dictybase-docker/postgres@ae759ff77b181c49a8ff301ae197535225ea3add 9.3
+9.3.5: git://github.com/dictybase-docker/postgres@e1e0b57 9.3
+9.3: git://github.com/dictybase-docker/postgres@e1e0b57 9.3
 
 9.4.0: git://github.com/dictybase-docker/postgres@51e5166d69320581cb707d6fb102d3ba04803400 9.4
 9.4: git://github.com/dictybase-docker/postgres@51e5166d69320581cb707d6fb102d3ba04803400 9.4
