@@ -1,16 +1,11 @@
-# Docker Official Images
+# Docker Images for dictyBase
 
-[![Build Status](https://travis-ci.org/docker-library/official-images.svg?branch=master)](https://travis-ci.org/docker-library/official-images)
-
-## Contributing to the standard library
-
-Thank you for your interest in the Docker official images project! We
-strive to make these instructions as simple and straightforward as
-possible, but if you find yourself lost, don't hesitate to seek us out
-on Freenode IRC in channel `#docker-library`, or by creating a GitHub
-issue here.
-
-Be sure to familiarize yourself with the [Guidelines for Creating and
+<!--[![Build Status](https://travis-ci.org/docker-library/official-images.svg?branch=master)](https://travis-ci.org/docker-library/official-images)-->
+Repository for managing docker images that will be used to deploy software
+developed at [dictybase](https://github.com/dictyBase). The process will mostly
+follow the guidelines and principles of the
+[official](https://github.com/docker-library/official-images) repository.
+So, be sure to familiarize yourself with the [Guidelines for Creating and
 Documenting Official
 Repositories](https://docs.docker.com/docker-hub/official_repos/) and the [Best
 practices for writing
@@ -78,9 +73,3 @@ Optionally, if `<dockerfile-dir>` is present, Stackbrew will look for the
 Bashbrew is a set of bash scripts for cloning, building, tagging, and pushing
 the Docker official images. See [`README.md` in the `bashbrew/`
 subfolder](bashbrew/README.md) for more information.
-
-## Stackbrew (deprecated)
-
-Stackbrew is a web-application that performs continuous building of the
-Docker official images. See [`README.md` in the `stackbrew/`
-subfolder](stackbrew/README.md) for more information.
