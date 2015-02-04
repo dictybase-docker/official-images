@@ -13,7 +13,7 @@ Dockerfiles](https://docs.docker.com/articles/dockerfile_best-practices/) in the
 Docker documentation.
 
 Also, the documentation for these images is currently stored separately in the
-[docker-library/docs](https://github.com/docker-library/docs) repository.
+[dictybase-docker/docs](https://github.com/dictybase-docker/docs) repository.
 
 ## Library definition files
 
