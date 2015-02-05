@@ -1,4 +1,4 @@
 # maintainer: Siddhartha Basu <siddhartha-basu@northwestern.edu> (@cybersiddhu)
 
-devel: git://github.com/dictybase-docker/modware-loader@3cc0067 devel 
+devel: git://github.com/dictybase-docker/modware-loader@3000d46 devel 
 
