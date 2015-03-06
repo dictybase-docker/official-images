@@ -1,4 +1,4 @@
-# maintainer: InfoSiftr <github@infosiftr.com> (@infosiftr)
+# maintainer: Siddhartha Basu <siddhartha-basu@northwestern.edu> (@cybersiddhu)
 
 8.4.22: git://github.com/dictybase-docker/postgres@e1e0b57 8.4
 8.4: git://github.com/dictybase-docker/postgres@e1e0b57 8.4
