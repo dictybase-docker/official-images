@@ -1,0 +1,4 @@
+# maintainer: Siddhartha Basu <siddhartha-basu@northwestern.edu> (@cybersiddhu)
+
+latest: git://github.com/dictybase-docker/bioperl-zmq-golang@d6d9756
+
