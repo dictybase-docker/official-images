@@ -1,5 +1,5 @@
 # maintainer: Siddhartha Basu <siddhartha-basu@northwestern.edu> (@cybersiddhu)
 
-latest: git://github.com/dictybase-docker/jbrowse@a1847a9 1.11.6
-1.11.6: git://github.com/dictybase-docker/jbrowse@a1847a9 1.11.6
+latest: git://github.com/dictybase-docker/jbrowse@242f489 1.11.6
+1.11.6: git://github.com/dictybase-docker/jbrowse@242f489 1.11.6
 
