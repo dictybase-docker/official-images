@@ -1,4 +1,4 @@
 # maintainer: Siddhartha Basu <siddhartha-basu@northwestern.edu> (@cybersiddhu)
 
-latest: git://github.com/dictybase-docker/zmq-golang@2dd0ada
+latest: git://github.com/dictybase-docker/zmq-golang@1d4ea3d
 
