@@ -14,3 +14,4 @@
 
 9.4.4: git://github.com/dictybase-docker/postgres@b7f694f 9.4
 9.4: git://github.com/dictybase-docker/postgres@b7f694f 9.4
+latest: git://github.com/dictybase-docker/postgres@b7f694f 9.4
