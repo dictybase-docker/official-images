@@ -1,8 +1,5 @@
 # maintainer: InfoSiftr <github@infosiftr.com> (@infosiftr)
 
-8.4.22: git://github.com/dictybase-docker/postgres@719e205482ff0671951b5ded6901c334fbd9a510 8.4
-8.4: git://github.com/dictybase-docker/postgres@719e205482ff0671951b5ded6901c334fbd9a510 8.4
-
 9.0.18: git://github.com/dictybase-docker/postgres@719e205482ff0671951b5ded6901c334fbd9a510 9.0
 9.0: git://github.com/dictybase-docker/postgres@719e205482ff0671951b5ded6901c334fbd9a510 9.0
 
