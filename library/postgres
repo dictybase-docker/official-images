@@ -1,16 +1,16 @@
 # maintainer: InfoSiftr <github@infosiftr.com> (@infosiftr)
 
-9.0.18: git://github.com/dictybase-docker/postgres@719e205482ff0671951b5ded6901c334fbd9a510 9.0
-9.0: git://github.com/dictybase-docker/postgres@719e205482ff0671951b5ded6901c334fbd9a510 9.0
+9.0.22: git://github.com/dictybase-docker/postgres@b7f694f 9.0
+9.0: git://github.com/dictybase-docker/postgres@b7f694f 9.0
 
-9.1.14: git://github.com/dictybase-docker/postgres@719e205482ff0671951b5ded6901c334fbd9a510 9.1
-9.1: git://github.com/dictybase-docker/postgres@719e205482ff0671951b5ded6901c334fbd9a510 9.1
+9.1.18: git://github.com/dictybase-docker/postgres@b7f694f 9.1
+9.1: git://github.com/dictybase-docker/postgres@b7f694f 9.1
 
-9.2.9: git://github.com/dictybase-docker/postgres@719e205482ff0671951b5ded6901c334fbd9a510 9.2
-9.2: git://github.com/dictybase-docker/postgres@719e205482ff0671951b5ded6901c334fbd9a510 9.2
+9.2.13: git://github.com/dictybase-docker/postgres@b7f694f 9.2
+9.2: git://github.com/dictybase-docker/postgres@b7f694f 9.2
 
-9.3.5: git://github.com/dictybase-docker/postgres@719e205482ff0671951b5ded6901c334fbd9a510 9.3
-9.3: git://github.com/dictybase-docker/postgres@719e205482ff0671951b5ded6901c334fbd9a510 9.3
+9.3.9: git://github.com/dictybase-docker/postgres@b7f694f 9.3
+9.3: git://github.com/dictybase-docker/postgres@b7f694f 9.3
 
-9.4.0: git://github.com/dictybase-docker/postgres@719e205482ff0671951b5ded6901c334fbd9a510 9.4
-9.4: git://github.com/dictybase-docker/postgres@719e205482ff0671951b5ded6901c334fbd9a510 9.4
+9.4.4: git://github.com/dictybase-docker/postgres@b7f694f 9.4
+9.4: git://github.com/dictybase-docker/postgres@b7f694f 9.4
