@@ -6,8 +6,14 @@ curl: git://github.com/docker-library/buildpack-deps@a0a59c61102e8b079d568db6936
 jessie-scm: git://github.com/docker-library/buildpack-deps@a0a59c61102e8b079d568db69368fb89421f75f2 jessie/scm
 scm: git://github.com/docker-library/buildpack-deps@a0a59c61102e8b079d568db69368fb89421f75f2 jessie/scm
 
-jessie: git://github.com/docker-library/buildpack-deps@a0a59c61102e8b079d568db69368fb89421f75f2 jessie
-latest: git://github.com/docker-library/buildpack-deps@a0a59c61102e8b079d568db69368fb89421f75f2 jessie
+jessie: git://github.com/docker-library/buildpack-deps@e88116df8558bd129851862e1bf56250ea52ec90 jessie
+latest: git://github.com/docker-library/buildpack-deps@e88116df8558bd129851862e1bf56250ea52ec90 jessie
+
+precise-curl: git://github.com/docker-library/buildpack-deps@4cd7279c3bbe2359e5e3798a267760a886422d6d precise/curl
+
+precise-scm: git://github.com/docker-library/buildpack-deps@4cd7279c3bbe2359e5e3798a267760a886422d6d precise/scm
+
+precise: git://github.com/docker-library/buildpack-deps@e88116df8558bd129851862e1bf56250ea52ec90 precise
 
 sid-curl: git://github.com/docker-library/buildpack-deps@a0a59c61102e8b079d568db69368fb89421f75f2 sid/curl
 
@@ -19,4 +25,10 @@ wheezy-curl: git://github.com/docker-library/buildpack-deps@a0a59c61102e8b079d56
 
 wheezy-scm: git://github.com/docker-library/buildpack-deps@a0a59c61102e8b079d568db69368fb89421f75f2 wheezy/scm
 
-wheezy: git://github.com/docker-library/buildpack-deps@a0a59c61102e8b079d568db69368fb89421f75f2 wheezy
+wheezy: git://github.com/docker-library/buildpack-deps@ca0f463579583f030cb5c8eb2c8dac207709feb5 wheezy
+
+wily-curl: git://github.com/docker-library/buildpack-deps@4cd7279c3bbe2359e5e3798a267760a886422d6d wily/curl
+
+wily-scm: git://github.com/docker-library/buildpack-deps@4cd7279c3bbe2359e5e3798a267760a886422d6d wily/scm
+
+wily: git://github.com/docker-library/buildpack-deps@ca0f463579583f030cb5c8eb2c8dac207709feb5 wily

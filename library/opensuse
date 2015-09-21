@@ -1,13 +1,9 @@
 # maintainer: Flavio Castelli <fcastelli@suse.com> (@flavio)
 
-# openSUSE 13.1
-13.1: git://github.com/openSUSE/docker-containers-build@fc6453ff4ce5d67ed77aad572acbf311214b41dc docker
-bottle: git://github.com/openSUSE/docker-containers-build@fc6453ff4ce5d67ed77aad572acbf311214b41dc docker
-
 # openSUSE 13.2
-13.2: git://github.com/openSUSE/docker-containers-build@4a69fad7e0ce58bca406092938bd295c3c885858 docker
-harlequin: git://github.com/openSUSE/docker-containers-build@4a69fad7e0ce58bca406092938bd295c3c885858 docker
-latest: git://github.com/openSUSE/docker-containers-build@4a69fad7e0ce58bca406092938bd295c3c885858 docker
+13.2: git://github.com/openSUSE/docker-containers-build@f3c7e8aa49da4c10b3352d56c28d3cea6f3afefa docker
+harlequin: git://github.com/openSUSE/docker-containers-build@f3c7e8aa49da4c10b3352d56c28d3cea6f3afefa docker
+latest: git://github.com/openSUSE/docker-containers-build@f3c7e8aa49da4c10b3352d56c28d3cea6f3afefa docker
 
 # openSUSE Tumbleweed
-tumbleweed: git://github.com/openSUSE/docker-containers-build@173974c5a5e386f4cc522289ba84a31c239f2dc0 docker
+tumbleweed: git://github.com/openSUSE/docker-containers-build@35541028a567a6b797487ec202eb2dc7d469a591 docker

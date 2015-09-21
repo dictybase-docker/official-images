@@ -1,9 +1,25 @@
 # maintainer: InfoSiftr <github@infosiftr.com> (@infosiftr)
 
-2.6.17: git://github.com/docker-library/redis@062335e0a8d20cab2041f25dfff2fbaf58544471 2.6
-2.6: git://github.com/docker-library/redis@062335e0a8d20cab2041f25dfff2fbaf58544471 2.6
+2.6.17: git://github.com/docker-library/redis@94e9dcaaa93312651e91815fe7e4c5ef0f266408 2.6
+2.6: git://github.com/docker-library/redis@94e9dcaaa93312651e91815fe7e4c5ef0f266408 2.6
 
-2.8.19: git://github.com/docker-library/redis@062335e0a8d20cab2041f25dfff2fbaf58544471 2.8
-2.8: git://github.com/docker-library/redis@062335e0a8d20cab2041f25dfff2fbaf58544471 2.8
-2: git://github.com/docker-library/redis@062335e0a8d20cab2041f25dfff2fbaf58544471 2.8
-latest: git://github.com/docker-library/redis@062335e0a8d20cab2041f25dfff2fbaf58544471 2.8
+2.6.17-32bit: git://github.com/docker-library/redis@5e3f74f3edbbf8311b86e40e7ebe47f602981387 2.6/32bit
+2.6-32bit: git://github.com/docker-library/redis@5e3f74f3edbbf8311b86e40e7ebe47f602981387 2.6/32bit
+
+2.8.22: git://github.com/docker-library/redis@151ba62d9b6a1485b636d57736f42ed9b26ac50b 2.8
+2.8: git://github.com/docker-library/redis@151ba62d9b6a1485b636d57736f42ed9b26ac50b 2.8
+2: git://github.com/docker-library/redis@151ba62d9b6a1485b636d57736f42ed9b26ac50b 2.8
+
+2.8.22-32bit: git://github.com/docker-library/redis@151ba62d9b6a1485b636d57736f42ed9b26ac50b 2.8/32bit
+2.8-32bit: git://github.com/docker-library/redis@151ba62d9b6a1485b636d57736f42ed9b26ac50b 2.8/32bit
+2-32bit: git://github.com/docker-library/redis@151ba62d9b6a1485b636d57736f42ed9b26ac50b 2.8/32bit
+
+3.0.4: git://github.com/docker-library/redis@151ba62d9b6a1485b636d57736f42ed9b26ac50b 3.0
+3.0: git://github.com/docker-library/redis@151ba62d9b6a1485b636d57736f42ed9b26ac50b 3.0
+3: git://github.com/docker-library/redis@151ba62d9b6a1485b636d57736f42ed9b26ac50b 3.0
+latest: git://github.com/docker-library/redis@151ba62d9b6a1485b636d57736f42ed9b26ac50b 3.0
+
+3.0.4-32bit: git://github.com/docker-library/redis@151ba62d9b6a1485b636d57736f42ed9b26ac50b 3.0/32bit
+3.0-32bit: git://github.com/docker-library/redis@151ba62d9b6a1485b636d57736f42ed9b26ac50b 3.0/32bit
+3-32bit: git://github.com/docker-library/redis@151ba62d9b6a1485b636d57736f42ed9b26ac50b 3.0/32bit
+32bit: git://github.com/docker-library/redis@151ba62d9b6a1485b636d57736f42ed9b26ac50b 3.0/32bit

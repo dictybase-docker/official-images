@@ -1,4 +1,4 @@
-# Docker Images for dictyBase
+# Docker Official Images
 
 <!--[![Build Status](https://travis-ci.org/docker-library/official-images.svg?branch=master)](https://travis-ci.org/docker-library/official-images)-->
 Repository for managing docker images that will be used to deploy software
@@ -14,11 +14,12 @@ Docker documentation.
 
 Also, the documentation for these images is currently stored separately in the
 [dictybase-docker/docs](https://github.com/dictybase-docker/docs) repository.
+=======
+# Docker Official Images
 
 ## Library definition files
 
-The library definition files are plain text files found in the `library/`
-subfolder of the official-images repository.
+Also, the Hub descriptions for these images are currently stored separately in the [`docker-library/docs` repository](https://github.com/docker-library/docs), whose [`README.md` file](https://github.com/docker-library/docs/blob/master/README.md) explains more about how it's structured and how to contribute to it. Please be prepared to submit a PR there as well, pending acceptance of your image here.
 
 It is highly recommended that you browse some of the existing `library/` file contents (and history to get a feel for how they change over time) before creating a new one to become familiar with the prevailing conventions and further help streamline the review process (so that we can focus on content instead of esoteric formatting or tag usage/naming).
 
@@ -76,8 +77,6 @@ Optionally, if `<dockerfile-dir>` is present, Bashbrew will look for the `Docker
 -	Create a pull request from your Git repository to this one. Please be sure to add details about what's changed, if possible.
 -	In the pull request comments, feel free to prod the repository's maintainers (found in the relevant `MAINTAINERS` file) using GitHub's @-mentions.
 
-## Bashbrew
+### Change to a tag in an existing repository (that you're the maintainer of)
 
-Bashbrew is a set of bash scripts for cloning, building, tagging, and pushing
-the Docker official images. See [`README.md` in the `bashbrew/`
-subfolder](bashbrew/README.md) for more information.
+Bashbrew is a set of bash scripts for cloning, building, tagging, and pushing the Docker official images. See [`README.md` in the `bashbrew/` subfolder](bashbrew/README.md) for more information.

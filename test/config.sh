@@ -1,38 +1,118 @@
 #!/bin/bash
 set -e
 
-globalTests=(
+globalTests+=(
 	utc
 	cve-2014--shellshock
+	no-hard-coded-passwords
+	override-cmd
 )
 
-declare -A testAlias=(
-	[pypy]='python'
+testAlias+=(
+	[iojs]='node'
 	[jruby]='ruby'
+	[pypy]='python'
+
+	[ubuntu]='debian'
+	[ubuntu-debootstrap]='debian'
 
 	[mariadb]='mysql'
 	[percona]='mysql'
 )
 
-declare -A imageTests=(
-	[python]='
-		python-hy
-		python-pip-requests-ssl
-		python-sqlite3
-		python-zlib
+imageTests+=(
+	[aerospike]='
+	'
+	[busybox]='
+	'
+	[celery]='
+	'
+	[clojure]='
+	'
+	[crate]='
+	'
+	[debian]='
+		debian-apt-get
+	'
+	[docker:dind]='
+		docker-dind
+	'
+	[django]='
+	'
+	[elasticsearch]='
+	'
+	[gcc]='
+	'
+	[golang]='
 	'
 	[haskell]='
 		haskell-cabal
 		haskell-ghci
 		haskell-runhaskell
 	'
+	[hylang]='
+		hylang-sh
+	'
+	[java]='
+	'
+	[jetty]='
+		jetty-hello-web
+	'
+	[julia]='
+	'
+	[memcached]='
+	'
+	[mongo]='
+		mongo-basics
+	'
+	[mono]='
+	'
+	[mysql]='
+		mysql-basics
+		mysql-initdb
+	'
+	[node]='
+	'
+	[percona]='
+	'
+	[perl]='
+	'
+	[php]='
+		php-ext-install
+		php-hello-world
+	'
+	[php:fpm]='
+		php-fpm-hello-web
+	'
+	[postgres]='
+		postgres-basics
+		postgres-initdb
+	'
+	[python]='
+		python-hy
+		python-imports
+		python-pip-requests-ssl
+		python-sqlite3
+	'
+	[rabbitmq]='
+	'
+	[r-base]='
+	'
+	[rails]='
+	'
+	[redis]='
+	'
+	[rethinkdb]='
+	'
 	[ruby]='
 		ruby-standard-libs
 		ruby-gems
 		ruby-bundler
+		ruby-hello-world
 	'
-	[mysql]='
-		mysql-basics
+	[tomcat]='
+	'
+	[wordpress]='
 	'
 # example onbuild
 #	[python:onbuild]='
@@ -40,12 +120,22 @@ declare -A imageTests=(
 #	'
 )
 
-declare -A globalExcludeTests=(
+globalExcludeTests+=(
 	# single-binary images
 	[hello-world_utc]=1
 	[swarm_utc]=1
+	[nats_utc]=1
+
+	[hello-world_no-hard-coded-passwords]=1
+	[swarm_no-hard-coded-passwords]=1
+	[nats_no-hard-coded-passwords]=1
+
+	[hello-world_override-cmd]=1
+	[swarm_override-cmd]=1
+	[nats_override-cmd]=1
 
 	# no "native" dependencies
 	[ruby:slim_ruby-bundler]=1
 	[ruby:slim_ruby-gems]=1
 )
+

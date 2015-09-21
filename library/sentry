@@ -1,6 +1,6 @@
-# maintainer: InfoSiftr <github@infosiftr.com> (@infosiftr)
+# maintainer: Matt Robenolt <matt@getsentry.com> (@mattrobenolt)
 
-6.4.4: git://github.com/docker-library/sentry@08e7bf99eee1e7a879422fc474b73a6fafecbc31
-6.4: git://github.com/docker-library/sentry@08e7bf99eee1e7a879422fc474b73a6fafecbc31
-6: git://github.com/docker-library/sentry@08e7bf99eee1e7a879422fc474b73a6fafecbc31
-latest: git://github.com/docker-library/sentry@08e7bf99eee1e7a879422fc474b73a6fafecbc31
+7.7.0: git://github.com/getsentry/docker-sentry@3115587c614e64c66419a26b4f7be6ac067e3a79
+7.7: git://github.com/getsentry/docker-sentry@3115587c614e64c66419a26b4f7be6ac067e3a79
+7: git://github.com/getsentry/docker-sentry@3115587c614e64c66419a26b4f7be6ac067e3a79
+latest: git://github.com/getsentry/docker-sentry@3115587c614e64c66419a26b4f7be6ac067e3a79

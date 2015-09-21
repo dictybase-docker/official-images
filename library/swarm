@@ -1,5 +1,6 @@
 # maintainer: Andrea Luzzardi <al@docker.com> (@aluzzardi)
 # maintainer: Victor Vieux <vieux@docker.com> (@vieux)
+# maintainer: Alexandre Beslic <abronan@docker.com> (@abronan)
 
-0.1.0: git://github.com/docker/swarm-library-image@d9999a8a797d8e9744f1bfc0e7211d016478b2fc
-latest: git://github.com/docker/swarm-library-image@d9999a8a797d8e9744f1bfc0e7211d016478b2fc
+0.4.0: git://github.com/docker/swarm-library-image@1e058ce0f547491bb33255c8a58236e3bea26cb3
+latest: git://github.com/docker/swarm-library-image@1e058ce0f547491bb33255c8a58236e3bea26cb3

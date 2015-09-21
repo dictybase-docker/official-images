@@ -8,21 +8,22 @@ self="$(basename "$0")"
 usage() {
 	cat <<EOUSAGE
 
-usage: $self [-t test ...] [imageTag ...]
+usage: $self [-t test ...] image:tag [...]
    ie: $self debian:wheezy
-       $self -t utc python:3-onbuild
-       $self -t utc python:3-onbuild -t py-onbuild
+       $self -t utc python:3
+       $self -t utc python:3 -t python-hy
 
-This script processes the specified docker images to test their running
+This script processes the specified Docker images to test their running
 environments.
 EOUSAGE
 }
 
 # arg handling
-opts="$(getopt -o 'ht:?' --long 'dry-run,help,test:' -- "$@" || { usage >&2 && false; })"
+opts="$(getopt -o 'ht:c:?' --long 'dry-run,help,test:,config:' -- "$@" || { usage >&2 && false; })"
 eval set -- "$opts"
 
 declare -A argTests=()
+declare -a configs=()
 dryRun=
 while true; do
 	flag=$1
@@ -31,6 +32,7 @@ while true; do
 		--dry-run) dryRun=1 ;;
 		--help|-h|'-?') usage && exit 0 ;;
 		--test|-t) argTests["$1"]=1 && shift ;;
+		--config|-c) configs+=("$(readlink -f "$1")") && shift ;;
 		--) break ;;
 		*)
 			{
@@ -42,25 +44,55 @@ while true; do
 	esac
 done
 
-# load config lists
-# contains:
-#   globalTests
-#   testAlias
-#   imageTests
-#   globalExcludeTests
-. "$dir/config.sh"
+if [ $# -eq 0 ]; then
+	usage >&2
+	exit 1
+fi
 
+# declare configuration variables
+declare -a globalTests=()
+declare -A testAlias=()
+declare -A imageTests=()
+declare -A globalExcludeTests=()
+
+# if there are no user-specified configs, use the default config
+if [ ${#configs} -eq 0 ]; then
+	configs+=("$dir/config.sh")
+fi
+
+# load the configs
+declare -A testPaths=()
+for conf in "${configs[@]}"; do
+	. "$conf"
+
+	# Determine the full path to any newly-declared tests
+	confDir="$(dirname "$conf")"
+
+	for testName in ${globalTests[@]} ${imageTests[@]}; do
+		[ "${testPaths[$testName]}" ] && continue
+
+		if [ -d "$confDir/tests/$testName" ]; then
+			# Test directory found relative to the conf file
+			testPaths[$testName]="$confDir/tests/$testName"
+		elif [ -d "$dir/tests/$testName" ]; then
+			# Test directory found in the main tests/ directory
+			testPaths[$testName]="$dir/tests/$testName"
+		fi
+	done
+done
+
+didFail=
 for dockerImage in "$@"; do
 	echo "testing $dockerImage"
 	
 	if ! docker inspect "$dockerImage" &> /dev/null; then
 		echo $'\timage does not exist!'
+		didFail=1
 		continue
 	fi
 	
-	noNamespace="${dockerImage##*/}"
-	repo="${noNamespace%:*}"
-	tagVar="${noNamespace#*:}"
+	repo="${dockerImage%:*}"
+	tagVar="${dockerImage#*:}"
 	#version="${tagVar%-*}"
 	variant="${tagVar##*-}"
 	
@@ -87,7 +119,6 @@ for dockerImage in "$@"; do
 		tests+=( "$t" )
 	done
 	
-	failures=0
 	currentTest=0
 	totalTest="${#tests[@]}"
 	for t in "${tests[@]}"; do
@@ -96,7 +127,7 @@ for dockerImage in "$@"; do
 		
 		# run test against dockerImage here
 		# find the script for the test
-		scriptDir="$dir/tests/$t"
+		scriptDir="${testPaths[$t]}"
 		if [ -d "$scriptDir" ]; then
 			script="$scriptDir/run.sh"
 			if [ -x "$script" -a ! -d "$script" ]; then
@@ -105,22 +136,29 @@ for dockerImage in "$@"; do
 					if [ -f "$scriptDir/expected-std-out.txt" ] && ! d="$(echo "$output" | diff -u "$scriptDir/expected-std-out.txt" - 2>/dev/null)"; then
 						echo 'failed; unexpected output:'
 						echo "$d"
+						didFail=1
 					else
 						echo 'passed'
 					fi
 				else
 					echo 'failed'
+					didFail=1
 				fi
 			else
-				# TODO warn scipt is not executable
 				echo "skipping"
 				echo >&2 "error: $script missing, not executable or is a directory"
+				didFail=1
 				continue
 			fi
 		else
 			echo "skipping"
-			echo >&2 "error: $scriptDir is not a directory"
+			echo >&2 "error: unable to locate test '$t'"
+			didFail=1
 			continue
 		fi
 	done
 done
+
+if [ "$didFail" ]; then
+	exit 1
+fi

@@ -11,6 +11,7 @@ src="$dir/src"
 logs="$dir/logs"
 namespaces='_'
 docker='docker'
+retries='4'
 
 library="$(readlink -f "$library")"
 src="$(readlink -f "$src")"
@@ -33,6 +34,10 @@ usage() {
 		  --all              Build all repositories specified in library
 		  --docker="$docker"
 		                     Use a custom Docker binary
+		  --retries="$retries"
+		                     How many times to try again if the build/push fails before
+		                     considering it a lost cause (always attempts a minimum of
+		                     one time, but maximum of one plus this number)
 		  --help, -h, -?     Print this help message
 		  --library="$library"
 		                     Where to find repository manifest files
@@ -49,6 +54,10 @@ usage() {
 		                     namespace because it is necessary to do so for dependent
 		                     images to use FROM correctly (think "onbuild" variants that
 		                     are "FROM base-image:some-version")
+		  --uniq
+		                     Only process the first tag of identical images
+		                     This is not recommended for build or push
+		                     i.e. process python:2.7, but not python:2
 		
 		build options:
 		  --no-build         Don't build, print what would build
@@ -63,13 +72,14 @@ usage() {
 }
 
 # arg handling
-opts="$(getopt -o 'h?' --long 'all,docker:,help,library:,logs:,namespaces:,no-build,no-clone,no-push,src:' -- "$@" || { usage >&2 && false; })"
+opts="$(getopt -o 'h?' --long 'all,docker:,help,library:,logs:,namespaces:,no-build,no-clone,no-push,retries:,src:,uniq' -- "$@" || { usage >&2 && false; })"
 eval set -- "$opts"
 
 doClone=1
 doBuild=1
 doPush=1
 buildAll=
+onlyUniq=
 while true; do
 	flag="$1"
 	shift
@@ -83,7 +93,9 @@ while true; do
 		--no-build) doBuild= ;;
 		--no-clone) doClone= ;;
 		--no-push) doPush= ;;
+		--retries) retries="$1" && (( retries++ )) && shift ;;
 		--src) src="$1" && shift ;;
+		--uniq) onlyUniq=1 ;;
 		--) break ;;
 		*)
 			{
@@ -130,6 +142,7 @@ queue=()
 declare -A repoGitRepo=()
 declare -A repoGitRef=()
 declare -A repoGitDir=()
+declare -A repoUniq=()
 
 logDir="$logs/$subcommand-$(date +'%Y-%m-%d--%H-%M-%S')"
 mkdir -p "$logDir"
@@ -175,13 +188,26 @@ for repoTag in "${repos[@]}"; do
 	fi
 	
 	if [ "${repoGitRepo[$repoTag]}" ]; then
-		queue+=( "$repoTag" )
+		if [ "$onlyUniq" ]; then
+			uniqLine="${repoGitRepo[$repoTag]}@${repoGitRef[$repoTag]} ${repoGitDir[$repoTag]}"
+			if [ -z "${repoUniq[$uniqLine]}" ]; then
+				queue+=( "$repoTag" )
+				repoUniq[$uniqLine]=$repoTag
+			fi
+		else
+			queue+=( "$repoTag" )
+		fi
 		continue
 	fi
 	
-	# parse the repo library file
+	if ! manifest="$("${cmd[@]}")"; then
+		echo >&2 "error: failed to fetch $repoTag (${cmd[*]})"
+		exit 1
+	fi
+	
+	# parse the repo manifest file
 	IFS=$'\n'
-	repoTagLines=( $("${cmd[@]}" | grep -vE '^#|^\s*$') )
+	repoTagLines=( $(echo "$manifest" | grep -vE '^#|^\s*$') )
 	unset IFS
 	
 	tags=()
@@ -210,7 +236,7 @@ for repoTag in "${repos[@]}"; do
 		gitRepo="${gitRepo%/}"
 		gitRepo="$src/$gitRepo"
 		
-		if [ "$subcommand" == 'build' ]; then
+		if [ "$subcommand" = 'build' ]; then
 			if [ -z "$doClone" ]; then
 				if [ "$doBuild" -a ! -d "$gitRepo" ]; then
 					echo >&2 "error: directory not found: $gitRepo"
@@ -223,16 +249,9 @@ for repoTag in "${repos[@]}"; do
 					git clone -q "$gitUrl" "$gitRepo"
 				else
 					# if we don't have the "ref" specified, "git fetch" in the hopes that we get it
-					if ! (
-						cd "$gitRepo"
-						git rev-parse --verify "${gitRef}^{commit}" &> /dev/null
-					); then
+					if ! ( cd "$gitRepo" && git rev-parse --verify "${gitRef}^{commit}" &> /dev/null ); then
 						echo "Fetching $repo ($gitUrl) ..."
-						(
-							cd "$gitRepo"
-							git fetch -q --all
-							git fetch -q --tags
-						)
+						( cd "$gitRepo" && git fetch -q --all && git fetch -q --tags )
 					fi
 				fi
 				
@@ -247,13 +266,39 @@ for repoTag in "${repos[@]}"; do
 		tags+=( "$repo:$tag" )
 	done
 	
-	if [ "$repo" = "$repoTag" ]; then
+	if [ "$repo" != "$repoTag" ]; then
+		tags=( "$repoTag" )
+	fi
+	
+	if [ "$onlyUniq" ]; then
+		for rt in "${tags[@]}"; do
+			uniqLine="${repoGitRepo[$rt]}@${repoGitRef[$rt]} ${repoGitDir[$rt]}"
+			if [ -z "${repoUniq[$uniqLine]}" ]; then
+				queue+=( "$rt" )
+				repoUniq[$uniqLine]=$rt
+			fi
+		done
+	else
 		# add all tags we just parsed
 		queue+=( "${tags[@]}" )
-	else
-		queue+=( "$repoTag" )
 	fi
 done
+
+# usage: gitCheckout "$gitRepo" "$gitRef" "$gitDir"
+gitCheckout() {
+	[ "$1" -a "$2" ] || return 1 # "$3" is allowed to be the empty string
+	(
+		set -x
+		cd "$1"
+		git reset -q HEAD
+		git checkout -q -- .
+		git clean -dfxq
+		git checkout -q "$2" --
+		cd "$1/$3"
+		"$dir/git-set-mtimes"
+	)
+	return 0
+}
 
 set -- "${queue[@]}"
 while [ "$#" -gt 0 ]; do
@@ -308,39 +353,28 @@ while [ "$#" -gt 0 ]; do
 			done
 			
 			if [ "$doBuild" ]; then
-				if ! (
-					set -x
-					cd "$gitRepo"
-					git reset -q HEAD
-					git checkout -q -- .
-					git clean -dfxq
-					git checkout -q "$gitRef" --
-					cd "$gitRepo/$gitDir"
-					"$dir/git-set-mtimes"
-				) &>> "$thisLog"; then
+				if ! gitCheckout "$gitRepo" "$gitRef" "$gitDir" &>> "$thisLog"; then
 					echo "- failed 'git checkout'; see $thisLog"
 					didFail=1
 					continue
 				fi
 				
-				if ! (
-					set -x
-					"$docker" build -t "$repoTag" "$gitRepo/$gitDir"
-				) &>> "$thisLog"; then
-					echo "- failed 'docker build'; see $thisLog"
-					didFail=1
-					continue
-				fi
+				tries="$retries"
+				while ! ( set -x && "$docker" build -t "$repoTag" "$gitRepo/$gitDir" ) &>> "$thisLog"; do
+					(( tries-- )) || true
+					if [ $tries -le 0 ]; then
+						echo >&2 "- failed 'docker build'; see $thisLog"
+						didFail=1
+						continue 2
+					fi
+				done
 				
 				for namespace in $namespaces; do
 					if [ "$namespace" = '_' ]; then
 						# images FROM other images is explicitly supported
 						continue
 					fi
-					if ! (
-						set -x
-						"$docker" tag -f "$repoTag" "$namespace/$repoTag"
-					) &>> "$thisLog"; then
+					if ! ( set -x && "$docker" tag -f "$repoTag" "$namespace/$repoTag" ) &>> "$thisLog"; then
 						echo "- failed 'docker tag'; see $thisLog"
 						didFail=1
 						continue
@@ -365,9 +399,14 @@ while [ "$#" -gt 0 ]; do
 				fi
 				if [ "$doPush" ]; then
 					echo "Pushing $namespace/$repoTag..."
-					if ! "$docker" push "$namespace/$repoTag" &>> "$thisLog" < /dev/null; then
-						echo >&2 "- $namespace/$repoTag failed to push; see $thisLog"
-					fi
+					tries="$retries"
+					while ! ( set -x && "$docker" push "$namespace/$repoTag" < /dev/null ) &>> "$thisLog"; do
+						(( tries-- )) || true
+						if [ $tries -le 0 ]; then
+							echo >&2 "- $namespace/$repoTag failed to push; see $thisLog"
+							continue 2
+						fi
+					done
 				else
 					echo "$docker push" "$namespace/$repoTag"
 				fi

@@ -1,0 +1,13 @@
+# maintainer: InfoSiftr <github@infosiftr.com> (@infosiftr)
+
+4.0.3: git://github.com/docker-library/kibana@0ffeed9bb61036fca3f23fa4f9208b90a484f150 4.0
+4.0: git://github.com/docker-library/kibana@0ffeed9bb61036fca3f23fa4f9208b90a484f150 4.0
+
+4.1.2: git://github.com/docker-library/kibana@e39420bcf5bb76cd4a11180532a44978d04cb485 4.1
+4.1: git://github.com/docker-library/kibana@e39420bcf5bb76cd4a11180532a44978d04cb485 4.1
+4: git://github.com/docker-library/kibana@e39420bcf5bb76cd4a11180532a44978d04cb485 4.1
+latest: git://github.com/docker-library/kibana@e39420bcf5bb76cd4a11180532a44978d04cb485 4.1
+
+4.2.0-beta1: git://github.com/docker-library/kibana@6447404cba714e9415a1f9f4e438fdc7c7682eff 4.2
+4.2.0: git://github.com/docker-library/kibana@6447404cba714e9415a1f9f4e438fdc7c7682eff 4.2
+4.2: git://github.com/docker-library/kibana@6447404cba714e9415a1f9f4e438fdc7c7682eff 4.2

@@ -1,0 +1,5 @@
+# maintainer: InfoSiftr <github@infosiftr.com> (@infosiftr)
+
+0.3.11: git://github.com/docker-library/julia@951fefea3d24b6d60f5e64447a1ee94f0b809448
+0.3: git://github.com/docker-library/julia@951fefea3d24b6d60f5e64447a1ee94f0b809448
+latest: git://github.com/docker-library/julia@951fefea3d24b6d60f5e64447a1ee94f0b809448

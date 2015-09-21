@@ -1,0 +1,5 @@
+# maintainer: Rob Hoelz <rob AT hoelz.ro> (@hoelzro)
+
+2015.07:  git://github.com/perl6/docker@2d0512062ab5682f91ff4befb427550ea3ecd72d
+
+latest:  git://github.com/perl6/docker@2d0512062ab5682f91ff4befb427550ea3ecd72d

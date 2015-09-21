@@ -1,9 +1,8 @@
-# maintainer: Tianon Gravi <admwiggin@gmail.com> (@tianon)
+# maintainer: Tianon Gravi <tianon@debian.org> (@tianon)
+# maintainer: Paul Tagliamonte <paultag@debian.org> (@paultag)
 
 # commits: (master..dist)
-#  - 1d9a53a 2015-01-28 debootstraps (squeeze, oldstable) for CVE-2015-0235
-#  
-#  - b6b91ab 2015-01-27 debootstraps (CVE-2015-0235)
+#  - 89e5cad 2015-09-07 debootstraps
 
 8.0: git://github.com/tianon/docker-brew-debian@b6b91ab925802aff7b832127c278aba23d88d3d1 jessie
 8: git://github.com/tianon/docker-brew-debian@b6b91ab925802aff7b832127c278aba23d88d3d1 jessie
@@ -29,5 +28,17 @@ unstable: git://github.com/tianon/docker-brew-debian@b6b91ab925802aff7b832127c27
 wheezy: git://github.com/tianon/docker-brew-debian@b6b91ab925802aff7b832127c278aba23d88d3d1 wheezy
 latest: git://github.com/tianon/docker-brew-debian@b6b91ab925802aff7b832127c278aba23d88d3d1 wheezy
 
-rc-buggy: git://github.com/tianon/dockerfiles@90d86ad63c4a06b7d04d14ad830381b876183b3c debian/rc-buggy
-experimental: git://github.com/tianon/dockerfiles@90d86ad63c4a06b7d04d14ad830381b876183b3c debian/experimental
+stretch: git://github.com/tianon/docker-brew-debian@89e5cad1df49d5d6778a9d7cb23d4de2639e1542 stretch
+
+testing: git://github.com/tianon/docker-brew-debian@89e5cad1df49d5d6778a9d7cb23d4de2639e1542 testing
+
+unstable: git://github.com/tianon/docker-brew-debian@89e5cad1df49d5d6778a9d7cb23d4de2639e1542 unstable
+
+7.9: git://github.com/tianon/docker-brew-debian@89e5cad1df49d5d6778a9d7cb23d4de2639e1542 wheezy
+7: git://github.com/tianon/docker-brew-debian@89e5cad1df49d5d6778a9d7cb23d4de2639e1542 wheezy
+wheezy: git://github.com/tianon/docker-brew-debian@89e5cad1df49d5d6778a9d7cb23d4de2639e1542 wheezy
+
+wheezy-backports: git://github.com/tianon/docker-brew-debian@89e5cad1df49d5d6778a9d7cb23d4de2639e1542 wheezy/backports
+
+rc-buggy: git://github.com/tianon/dockerfiles@698f86772367cf08c80396a1624b4d8fb59f94aa debian/rc-buggy
+experimental: git://github.com/tianon/dockerfiles@698f86772367cf08c80396a1624b4d8fb59f94aa debian/experimental
