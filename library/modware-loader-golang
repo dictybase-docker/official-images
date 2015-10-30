@@ -1,4 +1,5 @@
 # maintainer: Siddhartha Basu <siddhartha-basu@northwestern.edu> (@cybersiddhu)
 
 devel: git://github.com/dictybase-docker/modware-loader-golang@b8fe4ca devel
+bleeding: git://github.com/dictybase-docker/modware-loader-golang@b540cb5 devel
 
