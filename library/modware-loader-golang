@@ -2,4 +2,6 @@
 
 devel: git://github.com/dictybase-docker/modware-loader-golang@b8fe4ca devel
 1.6.2: git://github.com/dictybase-docker/modware-loader-golang@7ce21db 1.6.2
+1.7.0: git://github.com/dictybase-docker/modware-loader-golang@fc237a5 1.7.0
+1.8.1: git://github.com/dictybase-docker/modware-loader-golang@acabe25 1.8.1
 

@@ -2,4 +2,7 @@
 
 devel: git://github.com/dictybase-docker/modware-loader@0635ce0 devel
 1.6.2: git://github.com/dictybase-docker/modware-loader@49340b1 1.6.2
+1.7.0: git://github.com/dictybase-docker/modware-loader@c883ebf 1.7.0
+1.8.0: git://github.com/dictybase-docker/modware-loader@efbf5ae 1.8.0
+1.8.1: git://github.com/dictybase-docker/modware-loader@f27550f 1.8.1
 
